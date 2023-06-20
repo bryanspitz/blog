@@ -21,7 +21,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 async function run() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/blogDB");
+  await mongoose.connect(
+    "mongodb+srv://admin-bryanjspitz:pBTqDdla8NXD8OS7@cluster0.jjeup0y.mongodb.net/blogDB"
+  );
   console.log("Successfully connected to DB");
 
   const postSchema = new mongoose.Schema({
