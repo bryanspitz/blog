@@ -22,7 +22,7 @@ app.use(express.static("public"));
 
 async function run() {
   await mongoose.connect(
-    "mongodb+srv://admin-bryanjspitz:pBTqDdla8NXD8OS7@cluster0.jjeup0y.mongodb.net/blogDB"
+    `mongodb+srv://admin-bryanjspitz:${process.env.DB_PASSWORD}@cluster0.jjeup0y.mongodb.net/blogDB`
   );
   console.log("Successfully connected to DB");
 
