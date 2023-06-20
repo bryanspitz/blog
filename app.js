@@ -52,13 +52,13 @@ async function run() {
     res.render("compose");
   });
 
-  app.post("/compose", (req, res) => {
-    const post = {
+  app.post("/compose", async (req, res) => {
+    const post = new Post({
       title: req.body.postTitle,
       body: req.body.postText,
       kebabTitle: _.kebabCase(req.body.postTitle),
-    };
-    posts.push(post);
+    });
+    await post.save();
     res.redirect("/");
   });
 
