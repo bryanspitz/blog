@@ -27,6 +27,7 @@ async function run() {
   const postSchema = new mongoose.Schema({
     title: String,
     body: String,
+    kebabTitle: String,
   });
 
   const Post = mongoose.model("post", postSchema);
@@ -61,11 +62,11 @@ async function run() {
     res.redirect("/");
   });
 
-  app.get("/posts/:postTitle", (req, res) => {
+  app.get("/posts/:postTitle", async (req, res) => {
     const paramTitle = _.kebabCase(req.params.postTitle);
-    const post = posts.find((value) => value.kebabTitle === paramTitle);
+    const post = await Post.findOne({ kebabTitle: paramTitle });
 
-    if (typeof post !== typeof undefined) {
+    if (post) {
       res.render("post", { post: post });
     } else {
       res.redirect("/");
